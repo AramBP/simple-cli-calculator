@@ -11,7 +11,7 @@ public class Token {
         try {
             Integer.valueOf(value);
         } catch (NumberFormatException e) {
-            type = "Identifier";
+            this.type = "Identifier";
         }
     }
 
