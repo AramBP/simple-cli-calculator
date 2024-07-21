@@ -1,4 +1,5 @@
 import Calculator.Tokenizer.*;
+import Calculator.Parser.*;
 
 import java.util.Scanner;
 import java.util.ArrayList;
@@ -22,9 +23,12 @@ public class App {
                 List<Token> output = new ArrayList<Token>();
                 output = tokenizer.splitString(prompt);
 
+                Parser parser = new Parser();
+                List<TokenValue> parsedOutput = new ArrayList<TokenValue>();
+                parsedOutput = parser.parse(output);
                 System.out.print("(~)> ");
-                for (int i = 0; i < output.size(); i++){
-                    System.out.print(output.get(i).position + " ");
+                for (int i = 0; i < parsedOutput.size(); i++){
+                    System.out.print(parsedOutput.get(i) + " ");
                 }
                 System.out.print("\n");
 
