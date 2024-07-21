@@ -6,8 +6,8 @@ import Calculator.Tokenizer.Token;
 
 public class Parser {
     public List<TokenValue> parse(List<Token> tokens) throws InvalidTokenException{
-        List<TokenValue> validTokens = new ArrayList<TokenValue>();
-        List<TokenValue> invalidTokens = new ArrayList<TokenValue>();
+        List<TokenValue> validTokens = new ArrayList<>();
+        List<TokenValue> invalidTokens = new ArrayList<>();
 
         for (int i = 0; i < tokens.size(); i++){
             Token tok = tokens.get(i);

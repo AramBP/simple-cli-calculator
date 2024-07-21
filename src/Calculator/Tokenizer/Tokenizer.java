@@ -7,10 +7,10 @@ import java.util.List;
 public class Tokenizer {
     public List<Token> splitString(String input) throws InvalidPromptException{
         final char WHITE_SPACE = ' ';
-        List<Character> stopCharacters = new ArrayList<Character>();
+        List<Character> stopCharacters = new ArrayList<>();
         stopCharacters.addAll(Arrays.asList( new Character[] {WHITE_SPACE, '*', '/', '+', '-', '(', ')'}));
 
-        List<Token> tokens = new ArrayList<Token>();
+        List<Token> tokens = new ArrayList<>();
         int position = 0;
         String nonSymbol= "";
         

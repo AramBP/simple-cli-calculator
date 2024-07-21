@@ -20,11 +20,11 @@ public class App {
                 // validate expression
 
                 Tokenizer tokenizer = new Tokenizer();
-                List<Token> output = new ArrayList<Token>();
+                List<Token> output = new ArrayList<>();
                 output = tokenizer.splitString(prompt);
 
                 Parser parser = new Parser();
-                List<TokenValue> parsedOutput = new ArrayList<TokenValue>();
+                List<TokenValue> parsedOutput = new ArrayList<>();
                 parsedOutput = parser.parse(output);
                 System.out.print("(~)> ");
                 for (int i = 0; i < parsedOutput.size(); i++){
