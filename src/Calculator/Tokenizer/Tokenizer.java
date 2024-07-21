@@ -14,7 +14,9 @@ public class Tokenizer {
         int position = 0;
         String nonSymbol= "";
         
-        if (stopCharacters.contains(input.charAt(0))){
+        char firstChar = input.charAt(0);
+        if (stopCharacters.contains(firstChar) 
+            && firstChar != '('){
             throw new InvalidPromptException("first character cannot be an operator or white space");
         }
         
