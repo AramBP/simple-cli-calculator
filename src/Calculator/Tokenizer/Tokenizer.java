@@ -17,6 +17,7 @@ public class Tokenizer {
         if (stopCharacters.contains(input.charAt(0))){
             throw new InvalidPromptException("first character cannot be an operator or white space");
         }
+        
         for (int i = 0; i < input.length(); i++){
             char currentChar = input.charAt(i);
 

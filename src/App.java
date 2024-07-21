@@ -24,7 +24,7 @@ public class App {
 
                 System.out.print("(~)> ");
                 for (int i = 0; i < output.size(); i++){
-                    System.out.print(output.get(i).value + " ");
+                    System.out.print(output.get(i).position + " ");
                 }
                 System.out.print("\n");
 

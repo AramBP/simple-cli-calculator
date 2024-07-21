@@ -9,14 +9,4 @@ public class Token {
         this.position = position;
 
     }
-    public Boolean equals(Token token){
-        if (token == null){
-            return false;
-        }
-        if (token.value == this.value && token.position == this.position ){
-            return true;
-        } else {
-            return false;
-        }
-    }
 }
