@@ -38,7 +38,7 @@ public class Tokenizer {
                     nonSymbol = "";
                 }
                 if (currentChar != WHITE_SPACE){
-                    tokens.add(new Token(String.valueOf(currentChar), position, "Symbol"));
+                    tokens.add(new Token(String.valueOf(currentChar), position));
                     position += 1;
                 }
             } else {
