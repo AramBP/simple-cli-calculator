@@ -1,18 +1,25 @@
-## Getting Started
+## 2D Graphical Calculator
 
-Welcome to the VS Code Java world. Here is a guideline to help you get started to write Java code in Visual Studio Code.
+This project showcases a 2 dimensional graphical calculator that can plot multiple graphs and can also solve math problems.
 
-## Folder Structure
+## Project Features
 
-The workspace contains two folders by default, where:
+The project has the following features
 
-- `src`: the folder to maintain sources
-- `lib`: the folder to maintain dependencies
+- `Console input`: input is given trough the terminal
+- `String evaluation`: [todo: write something here]
+- `Graph plot`: [todo: write something here]
 
-Meanwhile, the compiled output files will be generated in the `bin` folder by default.
+## Project showcase and screenshots
 
-> If you want to customize the folder structure, open `.vscode/settings.json` and update the related settings there.
+[todo: insert screen shot]
 
-## Dependency Management
+> screenshot 1
 
-The `JAVA PROJECTS` view allows you to manage your dependencies. More details can be found [here](https://github.com/microsoft/vscode-java-dependency#manage-dependencies).
+## How to install
+
+...
+
+## How to use
+
+...
