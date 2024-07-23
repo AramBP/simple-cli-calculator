@@ -1,4 +1,3 @@
-import Calculator.Tokenizer.*;
 import Calculator.Parser.*;
 import Calculator.Sorter.*;
 import Calculator.Planter.Planter;
@@ -12,9 +11,8 @@ public class App {
         Scanner promptScanner = new Scanner(System.in);
         while (true){
             System.out.print("(P)> ");
-            List<Token> output = new ArrayList<>();
-            List<TokenValue> parsedOutput = new ArrayList<>();
-            List<TokenValue> postfixSortedOutput = new ArrayList<>();
+            List<Token> parsedInput= new ArrayList<>();
+            List<Token> postfixSortedOutput = new ArrayList<>();
 
             try{
                 String prompt = promptScanner.nextLine();
@@ -22,45 +20,16 @@ public class App {
                     break;
                 }
 
-                // validate expression
-                Tokenizer tokenizer = new Tokenizer();
-                output = tokenizer.splitString(prompt);
-
                 Parser parser = new Parser();
-                parsedOutput = parser.parse(output);
+                parsedInput = parser.parse(prompt);
 
-                Sorter sorter = new Sorter();
-                postfixSortedOutput = sorter.sort(parsedOutput);
+                System.out.println(parser.parsedInputToString(parsedInput));
                 
-                Planter planter = new Planter();
-                float result = planter.Plant(postfixSortedOutput);
-                
-                System.out.println("(~)> " + result);
+                continue;
             } catch (Exception e){
                 System.out.println("(~)> " + e.getMessage());
-                // -------------DEBUG-------------
-                System.out.print("(~)> Parsed output: ");
-                for (int i = 0; i < parsedOutput.size(); i++){
-                    if (parsedOutput.get(i) instanceof Digit){
-                        System.out.print(parsedOutput.get(i).ParentToken.value + " ");
-                    } else{
-                        System.out.print(parsedOutput.get(i).getClass().getSimpleName() + " ");
-                    }
-                }
-                System.out.print("\n");
-                
                 // https://paodayag.dev/reverse-polish-notation-js-parser/converter.html
-                // check if sorter is giving correct output
-                System.out.print("(~)> In RPN: ");
-                for (int i = 0; i < postfixSortedOutput.size(); i++){
-                    if (postfixSortedOutput.get(i) instanceof Digit){
-                        System.out.print(postfixSortedOutput.get(i).ParentToken.value + " ");
-                    } else{
-                        System.out.print(postfixSortedOutput.get(i).getClass().getSimpleName() + " ");
-                    }
-                }
-                System.out.print("\n");
-                // -----------------------------            
+                // check if sorter is giving correct output        
                 continue;
             }
 
