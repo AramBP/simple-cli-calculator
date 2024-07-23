@@ -1,4 +1,4 @@
-package Calculator.Planter;
+package Calculator.Planter.Expressions;
 
 public class PowerOfExpression extends BaseExpression{
     public PowerOfExpression(float left, float right){

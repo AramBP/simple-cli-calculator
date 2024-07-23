@@ -1,4 +1,4 @@
-package Calculator.Planter;
+package Calculator.Planter.Expressions;
 
 abstract class BaseExpression {
     public float leftOperand;

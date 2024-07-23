@@ -3,6 +3,11 @@ package Calculator.Planter;
 import Calculator.Parser.Token;
 import Calculator.Parser.Token.OperatorType;
 import Calculator.Parser.Token.TokenType;
+import Calculator.Planter.Expressions.DivisionExpression;
+import Calculator.Planter.Expressions.MultiplicationExpression;
+import Calculator.Planter.Expressions.PowerOfExpression;
+import Calculator.Planter.Expressions.SubtractionExpression;
+import Calculator.Planter.Expressions.SumExpression;
 
 import java.util.List;
 import java.util.ArrayList;

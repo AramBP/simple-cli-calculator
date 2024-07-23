@@ -1,4 +1,4 @@
-package Calculator.Planter;
+package Calculator.Planter.Expressions;
 
 public class MultiplicationExpression extends BaseExpression{
     public MultiplicationExpression(float left, float right){

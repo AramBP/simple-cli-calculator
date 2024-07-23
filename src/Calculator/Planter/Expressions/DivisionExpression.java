@@ -1,4 +1,4 @@
-package Calculator.Planter;
+package Calculator.Planter.Expressions;
 
 public class DivisionExpression extends BaseExpression {
     public DivisionExpression(float left, float right){
