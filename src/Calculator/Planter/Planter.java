@@ -1,6 +1,7 @@
 package Calculator.Planter;
 
 import Calculator.Parser.Token;
+import Calculator.Parser.Token.OperatorType;
 import Calculator.Parser.Token.TokenType;
 
 import java.util.List;
@@ -14,27 +15,34 @@ public class Planter {
             Token token = sortedTokens.get(i);
             if (token.tokenType == TokenType.DIGIT){
                 digits.add(token.value);
+            } else if (token.operatorType == OperatorType.UNARY_PRE && digits.size() == 1){
+                if (token.operator == '-'){
+                    float rightOperand = digits.removeLast();
+                    digits.addLast(new SubtractionExpression(0, rightOperand).Calculate());
+                } else {
+                    throw new UnrecognizedExpressionException("unknown unary prefix operator '" + token.operator + "'");
+                }
             } else if (digits.size() >= 2) {
                 float rightOperand = digits.removeLast();
                 float leftOperand = digits.removeLast();
-                switch (token.toString()) {
-                    case "+":
+                switch (token.operator) {
+                    case '+':
                         digits.addLast(new SumExpression(leftOperand, rightOperand).Calculate());
                         break;
-                    case "/":
+                    case '/':
                         digits.addLast(new DivisionExpression(leftOperand, rightOperand).Calculate());
                         break;
-                    case "*":
+                    case '*':
                         digits.addLast(new MultiplicationExpression(leftOperand, rightOperand).Calculate());
                         break;
-                    case "-":
+                    case '-':
                         digits.addLast(new SubtractionExpression(leftOperand, rightOperand).Calculate());
                         break;
                     default:
-                        throw new UnrecognizedExpressionException(token.toString());
+                        throw new UnrecognizedExpressionException(token.operator + "");
                 }
             } else {
-                throw new UnrecognizedExpressionException("not enough operands");
+                throw new UnrecognizedExpressionException("not enough operands ");
             }
         }
         float answer = digits.removeLast();
