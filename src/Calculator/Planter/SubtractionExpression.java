@@ -1,4 +1,4 @@
-package Calculator.Planting;
+package Calculator.Planter;
 
 public class SubtractionExpression extends BaseExpression{
     public SubtractionExpression(float left, float right){

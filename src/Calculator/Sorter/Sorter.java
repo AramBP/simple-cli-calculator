@@ -7,7 +7,7 @@ import Calculator.Parser.*;
 
 public class Sorter {
     
-    public List<TokenValue> sort(List<TokenValue> input) throws InvalidOperatorStack{
+    public List<TokenValue> sort(List<TokenValue> input) throws InvalidOperatorStack, UnrecognizedTokenException{
         // this function sorts the list of parsed tokens using the shunting yard algorithm
         // https://en.wikipedia.org/wiki/Shunting_yard_algorithm
         List<TokenValue> postfixQueue = new ArrayList<>();
@@ -36,6 +36,8 @@ public class Sorter {
                     throw new NoSuchElementException("Mismatched brackets on shunting stack");
                 }
                 operatorStack.removeLast();
+            } else {
+                throw new UnrecognizedTokenException(token.getClass().getSimpleName() + " at position " + token.ParentToken.position);
             }
         }
         while (operatorStack.size() > 0){

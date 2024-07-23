@@ -1,6 +1,7 @@
 import Calculator.Tokenizer.*;
 import Calculator.Parser.*;
 import Calculator.Sorter.*;
+import Calculator.Planter.Planter;
 
 import java.util.Scanner;
 import java.util.ArrayList;
@@ -11,31 +12,34 @@ public class App {
         Scanner promptScanner = new Scanner(System.in);
         while (true){
             System.out.print("(P)> ");
+            List<Token> output = new ArrayList<>();
+            List<TokenValue> parsedOutput = new ArrayList<>();
+            List<TokenValue> postfixSortedOutput = new ArrayList<>();
 
             try{
                 String prompt = promptScanner.nextLine();
-                
                 if (prompt.equalsIgnoreCase("exit")){
                     break;
                 }
-                // validate expression
 
+                // validate expression
                 Tokenizer tokenizer = new Tokenizer();
-                List<Token> output = new ArrayList<>();
                 output = tokenizer.splitString(prompt);
 
                 Parser parser = new Parser();
-                List<TokenValue> parsedOutput = new ArrayList<>();
                 parsedOutput = parser.parse(output);
 
-                // https://paodayag.dev/reverse-polish-notation-js-parser/converter.html
-                // check if sorter is giving correct output
-
                 Sorter sorter = new Sorter();
-                List<TokenValue> postfixSortedOutput = new ArrayList<>();
                 postfixSortedOutput = sorter.sort(parsedOutput);
-
-                System.out.print("(~)> ");
+                
+                Planter planter = new Planter();
+                float result = planter.Plant(postfixSortedOutput);
+                
+                System.out.println("(~)> " + result);
+            } catch (Exception e){
+                System.out.println("(~)> " + e.getMessage());
+                // -------------DEBUG-------------
+                System.out.print("(~)> Parsed output: ");
                 for (int i = 0; i < parsedOutput.size(); i++){
                     if (parsedOutput.get(i) instanceof Digit){
                         System.out.print(parsedOutput.get(i).ParentToken.value + " ");
@@ -44,8 +48,10 @@ public class App {
                     }
                 }
                 System.out.print("\n");
-
-                System.out.print("(~)> ");
+                
+                // https://paodayag.dev/reverse-polish-notation-js-parser/converter.html
+                // check if sorter is giving correct output
+                System.out.print("(~)> In RPN: ");
                 for (int i = 0; i < postfixSortedOutput.size(); i++){
                     if (postfixSortedOutput.get(i) instanceof Digit){
                         System.out.print(postfixSortedOutput.get(i).ParentToken.value + " ");
@@ -54,9 +60,7 @@ public class App {
                     }
                 }
                 System.out.print("\n");
-
-            } catch (Exception e){
-                System.out.println("(~)> " + e.getMessage());
+                // -----------------------------            
                 continue;
             }
 

@@ -8,14 +8,14 @@ public class Planter {
     public float Plant(List<TokenValue> sortedTokens) throws UnrecognizedExpressionException{
         List<Float> digits = new ArrayList<>();
 
-        while(sortedTokens.size() > 0){
-            TokenValue token = sortedTokens.removeFirst();
+       for(int i = 0; i < sortedTokens.size(); i++){
+            TokenValue token = sortedTokens.get(i);
             if (token instanceof Digit){
                 Digit digit = (Digit) token;
                 digits.add(digit.value);
             } else if (digits.size() >= 2) {
-                float leftOperand = digits.removeLast();
                 float rightOperand = digits.removeLast();
+                float leftOperand = digits.removeLast();
                 switch (token.getClass().getSimpleName()) {
                     case "Sum":
                         digits.addLast(new SumExpression(leftOperand, rightOperand).Calculate());
@@ -36,7 +36,7 @@ public class Planter {
                 throw new UnrecognizedExpressionException("not enough operands");
             }
         }
-        float answer = digits.getLast();
+        float answer = digits.removeLast();
         if (digits.size() != 0){
             throw new UnrecognizedExpressionException("not enough operators");
         }

@@ -1,4 +1,4 @@
-package Calculator.Planting;
+package Calculator.Planter;
 
 public class SumExpression extends BaseExpression {
     public SumExpression(float left, float right){
