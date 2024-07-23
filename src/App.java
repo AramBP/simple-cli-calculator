@@ -28,6 +28,9 @@ public class App {
                 List<TokenValue> parsedOutput = new ArrayList<>();
                 parsedOutput = parser.parse(output);
 
+                // https://paodayag.dev/reverse-polish-notation-js-parser/converter.html
+                // check if sorter is giving correct output
+
                 Sorter sorter = new Sorter();
                 List<TokenValue> postfixSortedOutput = new ArrayList<>();
                 postfixSortedOutput = sorter.sort(parsedOutput);

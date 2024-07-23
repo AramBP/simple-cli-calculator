@@ -13,7 +13,7 @@ public class Parser {
             Token tok = tokens.get(i);
             String tokValueStr = tok.value;
             try {
-                int tokValue = Integer.valueOf(tok.value);
+                float tokValue = Float.parseFloat(tok.value);
                 validTokens.add(new Digit(tok, tokValue));
             } catch (NumberFormatException e) {
                 switch (tokValueStr) {
