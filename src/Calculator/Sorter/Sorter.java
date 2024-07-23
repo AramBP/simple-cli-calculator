@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 import Calculator.Parser.*;
+import Calculator.Parser.Token.OperatorType;
 import Calculator.Parser.Token.TokenType;
 
 public class Sorter {
@@ -21,12 +22,25 @@ public class Sorter {
             if (token.tokenType == TokenType.DIGIT){
                 postfixQueue.addLast(token);
             } else if (token.tokenType == TokenType.OPERATOR){
-                // assumes that the operator is binary left associative 
-                while (operatorStack.size() > 0 
-                && operatorStack.getLast().precedence > token.precedence){
-                    postfixQueue.addLast(operatorStack.removeLast());
+
+                if(token.operatorType == OperatorType.UNARY_POST){
+                    postfixQueue.addLast(token);
+                } else if (token.operatorType == OperatorType.UNARY_PRE){
+                    operatorStack.addLast(token);
+                } else if (token.operatorType == OperatorType.BIN_LEFT){
+                    while (operatorStack.size() > 0 
+                    && operatorStack.getLast().precedence >= token.precedence){
+                        postfixQueue.addLast(operatorStack.removeLast());
+                    }
+                    operatorStack.addLast(token);
+                } else if (token.operatorType == OperatorType.BIN_RIGHT){
+                    while (operatorStack.size() > 0 
+                    && operatorStack.getLast().precedence > token.precedence){
+                        postfixQueue.addLast(operatorStack.removeLast());
+                    }
+                    operatorStack.addLast(token);
                 }
-                operatorStack.addLast(token);
+
             } else if (token.tokenType == TokenType.LEFT_BRACE){
                 operatorStack.addLast(token);
             } else if (token.tokenType == TokenType.RIGHT_BRACE){

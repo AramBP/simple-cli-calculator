@@ -47,7 +47,8 @@ public class Parser {
                         // if the list is empty, or if a previous object exists that is either a left bracket or another operator
                         // then '-' is an unary operator
                         if (validTokens.size() == 0 
-                        || (validTokens.getLast().tokenType != TokenType.DIGIT && validTokens.getLast().tokenType != TokenType.RIGHT_BRACE)){
+                        || validTokens.getLast().tokenType == TokenType.OPERATOR
+                        || validTokens.getLast().tokenType == TokenType.LEFT_BRACE){
                             validTokens.addLast(new Token(currentChar, OperatorType.UNARY_PRE, 2));
                         } else {
                             validTokens.addLast(new Token(currentChar, OperatorType.BIN_LEFT, 2));
