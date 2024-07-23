@@ -78,7 +78,7 @@ public class Parser {
     public String parsedInputToString(List<Token> parsedPrompt){
         String s = "";
         for (Token tok : parsedPrompt){
-            s += tok.toString();
+            s += tok.toString() + " ";
         }
         return s;
     }

@@ -1,6 +1,7 @@
-import Calculator.Parser.*;
-import Calculator.Sorter.*;
+import Calculator.Parser.Parser;
+import Calculator.Parser.Token;
 import Calculator.Planter.Planter;
+import Calculator.Sorter.Sorter;
 
 import java.util.Scanner;
 import java.util.ArrayList;
@@ -10,26 +11,31 @@ public class App {
     public static void main(String[] args) throws Exception {
         Scanner promptScanner = new Scanner(System.in);
         while (true){
-            System.out.print("(P)> ");
+            Parser parser = new Parser();
+            Sorter sorter = new Sorter();
+            Planter planter = new Planter();
+
+            String prompt = "";
             List<Token> parsedInput= new ArrayList<>();
             List<Token> postfixSortedOutput = new ArrayList<>();
+            System.out.print("(P)> ");
 
             try{
-                String prompt = promptScanner.nextLine();
+                prompt = promptScanner.nextLine();
                 if (prompt.equalsIgnoreCase("exit")){
                     break;
                 }
-
-                Parser parser = new Parser();
                 parsedInput = parser.parse(prompt);
-
-                System.out.println(parser.parsedInputToString(parsedInput));
+                postfixSortedOutput = sorter.sort(parsedInput);
                 
+                float result = planter.Plant(postfixSortedOutput);
+                System.out.println(result);
                 continue;
             } catch (Exception e){
                 System.out.println("(~)> " + e.getMessage());
-                // https://paodayag.dev/reverse-polish-notation-js-parser/converter.html
-                // check if sorter is giving correct output        
+                System.out.println("(~)> prompt string value: " + prompt);
+                System.out.println("(~)> parsed: " + parser.parsedInputToString(parsedInput));
+                System.out.println("(~)> RNP sorted: " + parser.parsedInputToString(postfixSortedOutput));
                 continue;
             }
 

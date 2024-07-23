@@ -4,31 +4,34 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 import Calculator.Parser.*;
+import Calculator.Parser.Token.TokenType;
 
 public class Sorter {
-    
-    public List<TokenValue> sort(List<TokenValue> input) throws InvalidOperatorStack, UnrecognizedTokenException{
+// use this website to check the output of this function
+// https://paodayag.dev/reverse-polish-notation-js-parser/converter.html
+
+    public List<Token> sort(List<Token> input) throws InvalidOperatorStack, UnrecognizedTokenException{
         // this function sorts the list of parsed tokens using the shunting yard algorithm
         // https://en.wikipedia.org/wiki/Shunting_yard_algorithm
-        List<TokenValue> postfixQueue = new ArrayList<>();
-        List<TokenValue> operatorStack = new ArrayList<>();
+        List<Token> postfixQueue = new ArrayList<>();
+        List<Token> operatorStack = new ArrayList<>();
 
         for (int i = 0; i < input.size(); i++){
-            TokenValue token = input.get(i);
-            if (token instanceof Digit){
+            Token token = input.get(i);
+            if (token.tokenType == TokenType.DIGIT){
                 postfixQueue.addLast(token);
-            } else if (isOperator(token)){
+            } else if (token.tokenType == TokenType.OPERATOR){
                 // assumes that the operator is binary left associative 
                 while (operatorStack.size() > 0 
-                && operatorPrecedence(operatorStack.getLast()) > operatorPrecedence(token)){
+                && operatorStack.getLast().precedence > token.precedence){
                     postfixQueue.addLast(operatorStack.removeLast());
                 }
                 operatorStack.addLast(token);
-            } else if (token instanceof LeftBrace){
+            } else if (token.tokenType == TokenType.LEFT_BRACE){
                 operatorStack.addLast(token);
-            } else if (token instanceof RightBrace){
+            } else if (token.tokenType == TokenType.RIGHT_BRACE){
                 try {
-                    while(!(operatorStack.getLast() instanceof LeftBrace)){
+                    while(operatorStack.getLast().tokenType != TokenType.LEFT_BRACE){
                         postfixQueue.addLast(operatorStack.removeLast());
                     }
                 } catch (NoSuchElementException e) {
@@ -37,11 +40,11 @@ public class Sorter {
                 }
                 operatorStack.removeLast();
             } else {
-                throw new UnrecognizedTokenException(token.getClass().getSimpleName() + " at position " + token.ParentToken.position);
+                throw new UnrecognizedTokenException(token.toString());
             }
         }
         while (operatorStack.size() > 0){
-            if (!isOperator(operatorStack.getLast())){
+            if (operatorStack.getLast().tokenType != TokenType.OPERATOR){
                 postfixQueue.clear();
                 throw new InvalidOperatorStack("");
             } else{
@@ -49,25 +52,5 @@ public class Sorter {
             }
         }
         return postfixQueue;
-    }
-
-    private Boolean isOperator(TokenValue token){
-        if (token instanceof Multiplication || token instanceof Division || token instanceof Sum || token instanceof Subtraction){
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    private int operatorPrecedence(TokenValue token){
-        // * and / are precedence 1
-        // + and - are precedence 0
-        int precedence = 0;
-
-        if (token instanceof Multiplication || token instanceof Division){
-            precedence = 1;
-        }
-
-        return precedence;
     }
 }

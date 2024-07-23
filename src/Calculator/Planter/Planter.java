@@ -1,36 +1,37 @@
 package Calculator.Planter;
 
-import Calculator.Parser.*;
+import Calculator.Parser.Token;
+import Calculator.Parser.Token.TokenType;
+
 import java.util.List;
 import java.util.ArrayList;
 
 public class Planter {
-    public float Plant(List<TokenValue> sortedTokens) throws UnrecognizedExpressionException{
+    public float Plant(List<Token> sortedTokens) throws UnrecognizedExpressionException{
         List<Float> digits = new ArrayList<>();
 
        for(int i = 0; i < sortedTokens.size(); i++){
-            TokenValue token = sortedTokens.get(i);
-            if (token instanceof Digit){
-                Digit digit = (Digit) token;
-                digits.add(digit.value);
+            Token token = sortedTokens.get(i);
+            if (token.tokenType == TokenType.DIGIT){
+                digits.add(token.value);
             } else if (digits.size() >= 2) {
                 float rightOperand = digits.removeLast();
                 float leftOperand = digits.removeLast();
-                switch (token.getClass().getSimpleName()) {
-                    case "Sum":
+                switch (token.toString()) {
+                    case "+":
                         digits.addLast(new SumExpression(leftOperand, rightOperand).Calculate());
                         break;
-                    case "Division":
+                    case "/":
                         digits.addLast(new DivisionExpression(leftOperand, rightOperand).Calculate());
                         break;
-                    case "Multiplication":
+                    case "*":
                         digits.addLast(new MultiplicationExpression(leftOperand, rightOperand).Calculate());
                         break;
-                    case "Subtraction":
+                    case "-":
                         digits.addLast(new SubtractionExpression(leftOperand, rightOperand).Calculate());
                         break;
                     default:
-                        throw new UnrecognizedExpressionException(token.getClass().getSimpleName());
+                        throw new UnrecognizedExpressionException(token.toString());
                 }
             } else {
                 throw new UnrecognizedExpressionException("not enough operands");
