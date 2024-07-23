@@ -1,10 +1,10 @@
-package Calculator.Planting;
+package Calculator.Planter;
 
 import Calculator.Parser.*;
 import java.util.List;
 import java.util.ArrayList;
 
-public class Planting {
+public class Planter {
     public float Plant(List<TokenValue> sortedTokens) throws UnrecognizedExpressionException{
         List<Float> digits = new ArrayList<>();
 
