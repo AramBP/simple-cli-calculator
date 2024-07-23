@@ -29,7 +29,10 @@ public class Tokenizer {
                     tokens.add(new Token(nonSymbol += currentChar, position));
                 } else if (currentChar == WHITE_SPACE) {
                     tokens.add(new Token(nonSymbol, position));
-                } else {
+                } else if (currentChar == ')'){
+                    //
+                } 
+                else {
                     throw new InvalidPromptException("last character cannot be an operator");
                 }
             }

@@ -1,5 +1,6 @@
 import Calculator.Tokenizer.*;
 import Calculator.Parser.*;
+import Calculator.Sorter.*;
 
 import java.util.Scanner;
 import java.util.ArrayList;
@@ -26,9 +27,28 @@ public class App {
                 Parser parser = new Parser();
                 List<TokenValue> parsedOutput = new ArrayList<>();
                 parsedOutput = parser.parse(output);
+
+                Sorter sorter = new Sorter();
+                List<TokenValue> postfixSortedOutput = new ArrayList<>();
+                postfixSortedOutput = sorter.sort(parsedOutput);
+
                 System.out.print("(~)> ");
                 for (int i = 0; i < parsedOutput.size(); i++){
-                    System.out.print(parsedOutput.get(i) + " ");
+                    if (parsedOutput.get(i) instanceof Digit){
+                        System.out.print(parsedOutput.get(i).ParentToken.value + " ");
+                    } else{
+                        System.out.print(parsedOutput.get(i).getClass().getSimpleName() + " ");
+                    }
+                }
+                System.out.print("\n");
+
+                System.out.print("(~)> ");
+                for (int i = 0; i < postfixSortedOutput.size(); i++){
+                    if (postfixSortedOutput.get(i) instanceof Digit){
+                        System.out.print(postfixSortedOutput.get(i).ParentToken.value + " ");
+                    } else{
+                        System.out.print(postfixSortedOutput.get(i).getClass().getSimpleName() + " ");
+                    }
                 }
                 System.out.print("\n");
 

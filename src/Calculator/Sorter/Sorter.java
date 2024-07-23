@@ -41,7 +41,7 @@ public class Sorter {
         while (operatorStack.size() > 0){
             if (!isOperator(operatorStack.getLast())){
                 postfixQueue.clear();
-                throw new InvalidOperatorStack(null);
+                throw new InvalidOperatorStack("");
             } else{
                 postfixQueue.addLast(operatorStack.removeLast());
             }
@@ -50,7 +50,7 @@ public class Sorter {
     }
 
     private Boolean isOperator(TokenValue token){
-        if (token instanceof Multiplication || token instanceof Division){
+        if (token instanceof Multiplication || token instanceof Division || token instanceof Sum || token instanceof Subtraction){
             return true;
         } else {
             return false;
