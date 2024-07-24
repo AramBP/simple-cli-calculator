@@ -61,12 +61,16 @@ public class Parser {
                         validTokens.addLast(new Token(currentChar, OperatorType.BIN_RIGHT, 4));
                         break;
                     case 'e':
+                        validTokens.addLast(new Token('('));
                         validTokens.addLast(new Token(Math.E));
+                        validTokens.addLast(new Token(')'));
                         break;
                     case 'p':
                         i++;
                         if (prompt.charAt(i) ==  'i'){
+                            validTokens.addLast(new Token('('));
                             validTokens.addLast(new Token(Math.PI));
+                            validTokens.addLast(new Token(')'));
                         }else{
                             i--;
                         }
