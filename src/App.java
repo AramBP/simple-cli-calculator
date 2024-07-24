@@ -34,7 +34,7 @@ public class App {
             } catch (Exception e){
                 System.out.println("(~)> " + e.getMessage());
                 System.out.println("(~)> prompt string value: " + prompt);
-                System.out.println("(~)> parsed: " + parsedInput.get(1));
+                System.out.println("(~)> parsed: " + parsedInput);
                 System.out.println("(~)> RNP sorted: " + postfixSortedOutput);
                 continue;
             }
