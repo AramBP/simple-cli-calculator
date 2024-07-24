@@ -8,12 +8,17 @@ public class Token {
     public OperatorType operatorType;
     public TokenType tokenType;
 
+    public boolean isDefinedConstant = false;
+
     public enum OperatorType {UNARY_POST, UNARY_PRE, BIN_LEFT, BIN_RIGHT};
     public enum TokenType {DIGIT, OPERATOR, FUNCTION, LEFT_BRACE, RIGHT_BRACE};
 
 
     public Token(double value){
         this.value = value;
+        if (this.value == Math.PI || this.value == Math.E){
+            this.isDefinedConstant = true;
+        }
         this.tokenType = TokenType.DIGIT;
     }
 

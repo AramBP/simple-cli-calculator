@@ -32,12 +32,14 @@ public class Sorter {
                     operatorStack.addLast(token);
                 } else if (token.operatorType == OperatorType.BIN_LEFT){
                     while (operatorStack.size() > 0 
+                    && operatorStack.getLast().tokenType == TokenType.OPERATOR
                     && operatorStack.getLast().precedence >= token.precedence){
                         postfixQueue.addLast(operatorStack.removeLast());
                     }
                     operatorStack.addLast(token);
                 } else if (token.operatorType == OperatorType.BIN_RIGHT){
                     while (operatorStack.size() > 0 
+                    && operatorStack.getLast().tokenType == TokenType.OPERATOR
                     && operatorStack.getLast().precedence > token.precedence){
                         postfixQueue.addLast(operatorStack.removeLast());
                     }
@@ -55,13 +57,17 @@ public class Sorter {
                     postfixQueue.clear();
                     throw new NoSuchElementException("Mismatched brackets on shunting stack");
                 }
+                // there is a left brace on the top of the operator stack
                 operatorStack.removeLast();
+                if (operatorStack.getLast().tokenType == TokenType.FUNCTION){
+                    postfixQueue.addLast(operatorStack.removeLast());
+                }
             } else {
                 throw new UnrecognizedTokenException(token.toString());
             }
         }
         while (operatorStack.size() > 0){
-            if (operatorStack.getLast().tokenType != TokenType.OPERATOR){
+            if (operatorStack.getLast().tokenType != TokenType.OPERATOR && operatorStack.getLast().tokenType != TokenType.FUNCTION){
                 postfixQueue.clear();
                 throw new InvalidOperatorStack("");
             } else{

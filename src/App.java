@@ -29,7 +29,7 @@ public class App {
                 postfixSortedOutput = sorter.sort(parsedInput);
                 
                 double result = planter.Plant(postfixSortedOutput);
-                System.out.println(result);
+                System.out.println("(~)> " + result);
                 continue;
             } catch (Exception e){
                 System.out.println("(~)> " + e.getMessage());

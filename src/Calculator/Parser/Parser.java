@@ -61,16 +61,12 @@ public class Parser {
                         validTokens.addLast(new Token(currentChar, OperatorType.BIN_RIGHT, 4));
                         break;
                     case 'e':
-                        validTokens.addLast(new Token('('));
                         validTokens.addLast(new Token(Math.E));
-                        validTokens.addLast(new Token(')'));
                         break;
                     case 'p':
                         i++;
                         if (prompt.charAt(i) ==  'i'){
-                            validTokens.addLast(new Token('('));
                             validTokens.addLast(new Token(Math.PI));
-                            validTokens.addLast(new Token(')'));
                         }else{
                             i--;
                         }
@@ -86,29 +82,19 @@ public class Parser {
 
                         switch (functionName) {
                             case "cos":
-                                validTokens.addLast(new Token('('));
                                 validTokens.addLast(new Token(functionName));
-                                validTokens.addLast(new Token(')'));
                                 break;
                             case "sin":
-                                validTokens.addLast(new Token('('));
                                 validTokens.addLast(new Token(functionName));
-                                validTokens.addLast(new Token(')'));
                                 break;
                             case "tan":
-                                validTokens.addLast(new Token('('));
                                 validTokens.addLast(new Token(functionName));
-                                validTokens.addLast(new Token(')'));
                                 break;  
                             case "log":
-                                validTokens.addLast(new Token('('));
                                 validTokens.addLast(new Token(functionName));
-                                validTokens.addLast(new Token(')'));
                                 break; 
                             case "ln":
-                                validTokens.addLast(new Token('('));
                                 validTokens.addLast(new Token(functionName));
-                                validTokens.addLast(new Token(')'));
                                 break;                     
                             default:
                                 throw new InvalidTokenException("" + functionName);
@@ -130,19 +116,31 @@ public class Parser {
         for (int i = 0; i < validTokens.size(); i++){
             Token token = validTokens.get(i);
             if (token.tokenType == TokenType.DIGIT){
-                // if previous token is a right brace then add a multiple between the right brace and the digit
-                if (validTokensClone.size() > 0 && validTokens.get(i-1).tokenType == TokenType.RIGHT_BRACE){
+                // if previous token is a right brace or a defined constant then add a multiple between the right brace and the digit
+                if (validTokensClone.size() > 0 
+                && (validTokens.get(i-1).tokenType == TokenType.RIGHT_BRACE || validTokens.get(i-1).isDefinedConstant) ){
                     validTokensClone.addLast(new Token('*', OperatorType.BIN_LEFT, 3));
                     validTokensClone.addLast(token);
                 }
-                // if the next token is a left brace then add a multiple between the left brace and the digit
-                else if (validTokens.get(i+1).tokenType == TokenType.LEFT_BRACE){
+                // if the next token is a left brace or a defined constant then add a multiple between the tokens
+                else if (validTokens.size() != (i+1) 
+                && (validTokens.get(i+1).tokenType == TokenType.LEFT_BRACE || validTokens.get(i+1).isDefinedConstant)){
                     validTokensClone.addLast(token);
                     validTokensClone.addLast(new Token('*', OperatorType.BIN_LEFT, 3));
                 } else {
                     validTokensClone.addLast(token);
                 }
-            } else if (token.tokenType == TokenType.LEFT_BRACE){
+            } else if (token.tokenType == TokenType.FUNCTION){
+                //if the previousfunction is a right brace or a digit then add a multiple between the tokens
+                if (validTokensClone.size() > 0 
+                && (validTokens.get(i-1).tokenType == TokenType.RIGHT_BRACE || validTokens.get(i-1).tokenType == TokenType.DIGIT)){
+                    validTokensClone.addLast(new Token('*', OperatorType.BIN_LEFT, 3));
+                    validTokensClone.addLast(token);
+                } else {
+                    validTokensClone.addLast(token);
+                }
+            } 
+            else if (token.tokenType == TokenType.LEFT_BRACE){
                 if (validTokensClone.size() > 1 && validTokens.get(i-1).tokenType == TokenType.RIGHT_BRACE && validTokens.get(i-2).tokenType != TokenType.FUNCTION){
                     validTokensClone.addLast(new Token('*', OperatorType.BIN_LEFT, 3));
                     validTokensClone.addLast(token);

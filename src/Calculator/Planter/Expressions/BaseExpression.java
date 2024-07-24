@@ -1,8 +1,8 @@
 package Calculator.Planter.Expressions;
 
 abstract class BaseExpression {
-    public double leftOperand;
-    public double rightOperand;
+    double leftOperand;
+    double rightOperand;
 
     public BaseExpression(double left, double right){
         this.leftOperand = left;
