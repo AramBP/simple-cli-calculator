@@ -99,22 +99,7 @@ public class Parser {
                                 validTokens.addLast(new Token('('));
                                 validTokens.addLast(new Token(functionName));
                                 validTokens.addLast(new Token(')'));
-                                break;
-                            case "asin":
-                                validTokens.addLast(new Token('('));
-                                validTokens.addLast(new Token(functionName));
-                                validTokens.addLast(new Token(')'));
-                                break; 
-                            case "acos":
-                                validTokens.addLast(new Token('('));
-                                validTokens.addLast(new Token(functionName));
-                                validTokens.addLast(new Token(')'));
                                 break;  
-                            case "atan":
-                                validTokens.addLast(new Token('('));
-                                validTokens.addLast(new Token(functionName));
-                                validTokens.addLast(new Token(')'));
-                                break;   
                             case "log":
                                 validTokens.addLast(new Token('('));
                                 validTokens.addLast(new Token(functionName));
