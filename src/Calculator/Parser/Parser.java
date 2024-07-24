@@ -76,9 +76,58 @@ public class Parser {
                         }
                         break;
                     default:
-                        // TODO: if cur char is a certain character check if it's a function
+                        String functionName = "" + currentChar;
+                        i++;
+                        while (i < prompt.length() && Character.isAlphabetic(prompt.charAt(i))){
+                            functionName += Character.toString(prompt.charAt(i));
+                            i++;
+                        }
+                        i--;
 
-                        throw new InvalidTokenException("" + currentChar);
+                        switch (functionName) {
+                            case "cos":
+                                validTokens.addLast(new Token('('));
+                                validTokens.addLast(new Token(functionName));
+                                validTokens.addLast(new Token(')'));
+                                break;
+                            case "sin":
+                                validTokens.addLast(new Token('('));
+                                validTokens.addLast(new Token(functionName));
+                                validTokens.addLast(new Token(')'));
+                                break;
+                            case "tan":
+                                validTokens.addLast(new Token('('));
+                                validTokens.addLast(new Token(functionName));
+                                validTokens.addLast(new Token(')'));
+                                break;
+                            case "asin":
+                                validTokens.addLast(new Token('('));
+                                validTokens.addLast(new Token(functionName));
+                                validTokens.addLast(new Token(')'));
+                                break; 
+                            case "acos":
+                                validTokens.addLast(new Token('('));
+                                validTokens.addLast(new Token(functionName));
+                                validTokens.addLast(new Token(')'));
+                                break;  
+                            case "atan":
+                                validTokens.addLast(new Token('('));
+                                validTokens.addLast(new Token(functionName));
+                                validTokens.addLast(new Token(')'));
+                                break;   
+                            case "log":
+                                validTokens.addLast(new Token('('));
+                                validTokens.addLast(new Token(functionName));
+                                validTokens.addLast(new Token(')'));
+                                break; 
+                            case "ln":
+                                validTokens.addLast(new Token('('));
+                                validTokens.addLast(new Token(functionName));
+                                validTokens.addLast(new Token(')'));
+                                break;                     
+                            default:
+                                throw new InvalidTokenException("" + functionName);
+                        }
                 }
             }
         }
@@ -109,7 +158,7 @@ public class Parser {
                     validTokensClone.addLast(token);
                 }
             } else if (token.tokenType == TokenType.LEFT_BRACE){
-                if (validTokensClone.size() > 0 && validTokens.get(i-1).tokenType == TokenType.RIGHT_BRACE){
+                if (validTokensClone.size() > 1 && validTokens.get(i-1).tokenType == TokenType.RIGHT_BRACE && validTokens.get(i-2).tokenType != TokenType.FUNCTION){
                     validTokensClone.addLast(new Token('*', OperatorType.BIN_LEFT, 3));
                     validTokensClone.addLast(token);
                 }
