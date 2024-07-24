@@ -24,7 +24,7 @@ public class Parser {
                 }
                 i--;
                 try {
-                    validTokens.addLast(new Token(Float.valueOf(numStr)));
+                    validTokens.addLast(new Token(Double.valueOf(numStr)));
                 } catch (NumberFormatException e){
                     throw new NumberFormatException("ERROR - Invalid Number: '" + numStr + "'");
                 }
@@ -61,12 +61,12 @@ public class Parser {
                         validTokens.addLast(new Token(currentChar, OperatorType.BIN_RIGHT, 4));
                         break;
                     case 'e':
-                        validTokens.addLast(new Token((float)Math.E));
+                        validTokens.addLast(new Token(Math.E));
                         break;
                     case 'p':
                         i++;
                         if (prompt.charAt(i) ==  'i'){
-                            validTokens.addLast(new Token((float)Math.PI));
+                            validTokens.addLast(new Token(Math.PI));
                         }else{
                             i--;
                         }
