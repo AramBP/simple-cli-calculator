@@ -89,7 +89,39 @@ public class Parser {
             }
             throw new InvalidTokenException(errMessage);
         }
-        return validTokens;
+
+        // implicit multiplication
+        List<Token> validTokensClone = new ArrayList<>();
+        
+        for (int i = 0; i < validTokens.size(); i++){
+            Token token = validTokens.get(i);
+            if (token.tokenType == TokenType.DIGIT){
+                // if previous token is a right brace then add a multiple between the right brace and the digit
+                if (validTokensClone.size() > 0 && validTokens.get(i-1).tokenType == TokenType.RIGHT_BRACE){
+                    validTokensClone.addLast(new Token('*', OperatorType.BIN_LEFT, 3));
+                    validTokensClone.addLast(token);
+                }
+                // if the next token is a left brace then add a multiple between the left brace and the digit
+                else if (validTokens.get(i+1).tokenType == TokenType.LEFT_BRACE){
+                    validTokensClone.addLast(token);
+                    validTokensClone.addLast(new Token('*', OperatorType.BIN_LEFT, 3));
+                } else {
+                    validTokensClone.addLast(token);
+                }
+            } else if (token.tokenType == TokenType.LEFT_BRACE){
+                if (validTokensClone.size() > 0 && validTokens.get(i-1).tokenType == TokenType.RIGHT_BRACE){
+                    validTokensClone.addLast(new Token('*', OperatorType.BIN_LEFT, 3));
+                    validTokensClone.addLast(token);
+                }
+                else {
+                    validTokensClone.addLast(token);
+                }
+            } else {
+                validTokensClone.addLast(token);
+            }
+        }
+
+        return validTokensClone;
     }
 
     public String parsedInputToString(List<Token> parsedPrompt){
