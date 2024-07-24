@@ -2,7 +2,7 @@ package Calculator.Parser;
 
 public class Token {
     public char operator;
-    public float value;
+    public double value;
     public int precedence;
     public OperatorType operatorType;
     public TokenType tokenType;
@@ -11,7 +11,7 @@ public class Token {
     public enum TokenType {DIGIT, OPERATOR, LEFT_BRACE, RIGHT_BRACE};
 
 
-    public Token(float value){
+    public Token(double value){
         this.value = value;
         this.tokenType = TokenType.DIGIT;
     }
@@ -35,7 +35,7 @@ public class Token {
 
     public String toString(){
         if (this.tokenType == TokenType.DIGIT){
-            return Float.toString(this.value);
+            return Double.toString(this.value);
         } else {
             return (Character.toString(this.operator));
         }
