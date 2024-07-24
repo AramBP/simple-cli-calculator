@@ -28,7 +28,7 @@ public class App {
                 parsedInput = parser.parse(prompt);
                 postfixSortedOutput = sorter.sort(parsedInput);
                 
-                float result = planter.Plant(postfixSortedOutput);
+                double result = planter.Plant(postfixSortedOutput);
                 System.out.println(result);
                 continue;
             } catch (Exception e){

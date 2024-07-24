@@ -13,8 +13,8 @@ import java.util.List;
 import java.util.ArrayList;
 
 public class Planter {
-    public float Plant(List<Token> sortedTokens) throws UnrecognizedExpressionException{
-        List<Float> digits = new ArrayList<>();
+    public double Plant(List<Token> sortedTokens) throws UnrecognizedExpressionException{
+        List<Double> digits = new ArrayList<>();
         List<Token> operators = new ArrayList<Token>(sortedTokens);
 
         for (int i = 0; i < sortedTokens.size(); i++){
@@ -27,8 +27,8 @@ public class Planter {
         for(int i = 0; i < operators.size(); i++){
             Token token = operators.get(i);
             if (digits.size() >= 2) {
-                float rightOperand = digits.removeLast();
-                float leftOperand = digits.removeLast();
+                double rightOperand = digits.removeLast();
+                double leftOperand = digits.removeLast();
                 switch (token.operator) {
                     case '+':
                         digits.addLast(new SumExpression(leftOperand, rightOperand).Calculate());
@@ -50,7 +50,7 @@ public class Planter {
                 }
             } else if (token.operatorType == OperatorType.UNARY_PRE && digits.size() == 1){
                 if (token.operator == '-'){
-                    float rightOperand = digits.removeLast();
+                    double rightOperand = digits.removeLast();
                     digits.addLast(new SubtractionExpression(0, rightOperand).Calculate());
                 } else {
                     throw new UnrecognizedExpressionException("unknown unary prefix operator '" + token.operator + "'");
@@ -59,7 +59,7 @@ public class Planter {
                 throw new UnrecognizedExpressionException("not enough operands; number of digits left " + digits.size() + ", operator type " + token.tokenType + ", token: " + token);
             }
         }
-        float answer = digits.removeLast();
+        double answer = digits.removeLast();
         if (digits.size() != 0){
             throw new UnrecognizedExpressionException("not enough operators");
         }

@@ -1,11 +1,11 @@
 package Calculator.Planter.Expressions;
 
 public class SumExpression extends BaseExpression {
-    public SumExpression(float left, float right){
+    public SumExpression(double left, double right){
         super(left, right);
     }
     @Override
-    public float Calculate(){
+    public double Calculate(){
         return (leftOperand+rightOperand);
     }
 }

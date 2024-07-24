@@ -1,12 +1,12 @@
 package Calculator.Planter.Expressions;
 
 abstract class BaseExpression {
-    public float leftOperand;
-    public float rightOperand;
+    public double leftOperand;
+    public double rightOperand;
 
-    public BaseExpression(float left, float right){
+    public BaseExpression(double left, double right){
         this.leftOperand = left;
         this.rightOperand = right;
     }
-    public abstract float Calculate();
+    public abstract double Calculate();
 }

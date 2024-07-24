@@ -1,11 +1,11 @@
 package Calculator.Planter.Expressions;
 
 public class PowerOfExpression extends BaseExpression{
-    public PowerOfExpression(float left, float right){
+    public PowerOfExpression(double left, double right){
         super(left, right);
     }
     @Override
-    public float Calculate(){
-        return ((float)Math.pow(leftOperand, rightOperand));
+    public double Calculate(){
+        return (Math.pow(leftOperand, rightOperand));
     }
 }

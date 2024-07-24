@@ -1,11 +1,11 @@
 package Calculator.Planter.Expressions;
 
 public class DivisionExpression extends BaseExpression {
-    public DivisionExpression(float left, float right){
+    public DivisionExpression(double left, double right){
         super(left,right);
     }
     @Override
-    public float Calculate(){
+    public double Calculate(){
         return (leftOperand / rightOperand);
     }
 }

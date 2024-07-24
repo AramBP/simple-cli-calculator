@@ -1,11 +1,11 @@
 package Calculator.Planter.Expressions;
 
 public class MultiplicationExpression extends BaseExpression{
-    public MultiplicationExpression(float left, float right){
+    public MultiplicationExpression(double left, double right){
         super(left, right);
     }
     @Override
-    public float Calculate(){
+    public double Calculate(){
         return (leftOperand * rightOperand);
     }
 }
