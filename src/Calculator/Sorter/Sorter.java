@@ -21,7 +21,10 @@ public class Sorter {
             Token token = input.get(i);
             if (token.tokenType == TokenType.DIGIT){
                 postfixQueue.addLast(token);
-            } else if (token.tokenType == TokenType.OPERATOR){
+            } else if (token.tokenType == TokenType.FUNCTION){
+                operatorStack.addLast(token);
+            }
+            else if (token.tokenType == TokenType.OPERATOR){
 
                 if(token.operatorType == OperatorType.UNARY_POST){
                     postfixQueue.addLast(token);
