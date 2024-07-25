@@ -91,7 +91,16 @@ public class Parser {
                                 validTokens.addLast(new Token(functionName));
                                 break;  
                             case "log":
-                                validTokens.addLast(new Token(functionName));
+                                //if we find log then we want to keep searching for trailing numbers
+                                String logBase = new String();
+                                i++;
+                                while(i < prompt.length() && isNumeric(prompt.charAt(i))){
+                                    logBase = logBase + Character.toString(prompt.charAt(i));
+                                    i++;
+                                }
+                                i--;
+                                if (logBase.isEmpty()) logBase = "10";
+                                validTokens.addLast(new LogarithmToken(functionName, Double.valueOf(logBase)));
                                 break; 
                             case "ln":
                                 validTokens.addLast(new Token(functionName));

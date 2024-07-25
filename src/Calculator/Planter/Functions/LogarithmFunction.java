@@ -1,11 +1,13 @@
 package Calculator.Planter.Functions;
 
 public class LogarithmFunction extends BaseFunction{
-    public LogarithmFunction(double arg){
+    double logarithmBase;
+    public LogarithmFunction(double arg, double base){
         super(arg);
+        this.logarithmBase = base;
     }
     @Override
     public double Calculate(){
-        return Math.log10(functionArgument);
+        return (Math.log(functionArgument)/Math.log(logarithmBase));
     }
 }

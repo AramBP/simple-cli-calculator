@@ -3,6 +3,7 @@ package Calculator.Planter;
 import Calculator.Parser.Token;
 import Calculator.Parser.Token.OperatorType;
 import Calculator.Parser.Token.TokenType;
+import Calculator.Parser.LogarithmToken;
 import Calculator.Planter.Expressions.DivisionExpression;
 import Calculator.Planter.Expressions.MultiplicationExpression;
 import Calculator.Planter.Expressions.PowerOfExpression;
@@ -61,7 +62,7 @@ public class Planter {
                         digits.addLast(new CosineFunction(functionArg).Calculate());
                         break;
                     case "log":
-                        digits.addLast(new LogarithmFunction(functionArg).Calculate());
+                        digits.addLast(new LogarithmFunction(functionArg, ((LogarithmToken)token).logarithmBase).Calculate());
                         break;
                     case "ln":
                         digits.addLast(new NaturalLogarithmFunction(functionArg).Calculate());
