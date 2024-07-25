@@ -13,6 +13,7 @@ import Calculator.Planter.Functions.CosineFunction;
 import Calculator.Planter.Functions.LogarithmFunction;
 import Calculator.Planter.Functions.NaturalLogarithmFunction;
 import Calculator.Planter.Functions.SineFunction;
+import Calculator.Planter.Functions.SquareRootFunction;
 import Calculator.Planter.Functions.TangentFunction;
 
 import java.util.List;
@@ -66,6 +67,9 @@ public class Planter {
                         break;
                     case "ln":
                         digits.addLast(new NaturalLogarithmFunction(functionArg).Calculate());
+                        break;
+                    case "sqrt":
+                        digits.addLast(new SquareRootFunction(functionArg).Calculate());
                         break;
                     default:
                         throw new UnrecognizedExpressionException("function '" + token.functionName +"'");

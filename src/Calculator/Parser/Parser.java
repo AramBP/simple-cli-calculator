@@ -104,7 +104,10 @@ public class Parser {
                                 break; 
                             case "ln":
                                 validTokens.addLast(new Token(functionName));
-                                break;                     
+                                break;  
+                            case "sqrt":
+                                validTokens.addLast(new Token(functionName));
+                                break;                   
                             default:
                                 throw new InvalidTokenException("" + functionName);
                         }
