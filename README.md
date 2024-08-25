@@ -1,26 +1,6 @@
-## 2D Graphical Calculator
+## Command Line Calculator
 
-This project showcases a 2 dimensional graphical calculator that can plot multiple graphs and also solve math problems.
+This project showcases a calculator that can solve math problems.
+It can evaluate expressions and calculates the using RPN
 
-## Project Features
-
-The project has the following features
-
-- `Calculator`: [todo: write something here]
-- `Graph plot`: [todo: write something here]
-
-## Project showcase and screenshots
-
-[todo: insert screen shots]
-
-> screenshot 1
-
-## How to install
-
-...
-
-## How to use
-
-...
-
-hallo
+Based on "calculator.pdf" inside the project directory
